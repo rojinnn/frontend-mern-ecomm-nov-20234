@@ -23,7 +23,7 @@ const Nav = () => {
           </li>
           <li>
             <Link to="/signUp" onClick={logout}>
-              Log Out ({JSON.parse(auth).name})
+              Log Out
             </Link>
           </li>
         </ul>
