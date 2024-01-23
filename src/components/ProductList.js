@@ -37,6 +37,7 @@ const ProductList = () => {
         <li>Name</li>
         <li>Price</li>
         <li>Category</li>
+        <li>operation</li>
       </ul>
       {products.length > 0 ? (
         products.map((e, i) => (

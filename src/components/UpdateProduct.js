@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
@@ -8,6 +8,9 @@ const UpdateProduct = () => {
   const [brand, setBrand] = useState("");
   const navigate = useNavigate();
   const params = useParams();
+  useEffect(() => {
+    getProductDetails();
+  }, []);
 
   const getProductDetails = async () => {
     let result = await fetch(`http://localhost:5000/product/${params.id}`);
@@ -21,7 +24,7 @@ const UpdateProduct = () => {
   const updateProduct = async () => {
     let result = await fetch(`http://localhost:5000/product/${params.id}`, {
       method: "put",
-      body: JSON.stringify({ name, price, brand, category }),
+      body: JSON.stringify({ name, price, category, brand }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -37,29 +40,37 @@ const UpdateProduct = () => {
         type="text"
         placeholder="Enter Product Brand"
         className="inputBox"
+        onChange={(e) => {
+          setBrand(e.target.value);
+        }}
         value={brand}
-        onChange={(e) => setBrand(e.target.value)}
       />
       <input
         type="text"
         placeholder="Enter Product Name"
         className="inputBox"
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
         value={name}
-        onChange={(e) => setName(e.target.value)}
       />
       <input
-        type="text"
+        type="number"
         placeholder="Enter Product Price"
         className="inputBox"
+        onChange={(e) => {
+          setPrice(e.target.value);
+        }}
         value={price}
-        onChange={(e) => setPrice(e.target.value)}
       />
       <input
         type="text"
         placeholder="Enter Product Category"
         className="inputBox"
+        onChange={(e) => {
+          setCategory(e.target.value);
+        }}
         value={category}
-        onChange={(e) => setCategory(e.target.value)}
       />
       <button className="appButton" onClick={updateProduct}>
         Update Product
