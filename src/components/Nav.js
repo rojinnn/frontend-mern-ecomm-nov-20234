@@ -11,7 +11,7 @@ const Nav = () => {
   return (
     <div>
       {auth ? (
-        <ul>
+        <ul className="nav-ul">
           <li>
             <Link to="/">Products</Link>
           </li>
