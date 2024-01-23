@@ -28,9 +28,27 @@ const ProductList = () => {
       getProducts();
     }
   };
+  const searchHandle = async (e) => {
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:5000/search/${key}`);
+      result = await result.json();
+      if (result) {
+        setProducts(result);
+      } else {
+        getProducts();
+      }
+    }
+  };
   return (
     <div className="product-list">
       <h3>Product List</h3>
+      <input
+        type="text"
+        placeholder="Search Product"
+        className="search-product-box"
+        onChange={searchHandle}
+      />
       <ul>
         <li>S.No</li>
         <li>Brand</li>
