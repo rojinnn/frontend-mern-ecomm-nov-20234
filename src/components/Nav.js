@@ -1,17 +1,42 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const auth = localStorage.getItem("user");
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/signUp");
+  };
   return (
     <div>
-      <ul className="nav-ul nav-right">
-        <li>
-          <Link to="/signup">SignUp</Link>
-        </li>
-        <li>
-          <Link to="/login">LogIn</Link>
-        </li>
-      </ul>
+      {auth ? (
+        <ul>
+          <li>
+            <Link to="/">Products</Link>
+          </li>
+          <li>
+            <Link to="/add">Add Products</Link>
+          </li>
+          <li>
+            <Link to="/update">Update Products</Link>
+          </li>
+          <li>
+            <Link to="/signUp" onClick={logout}>
+              Log Out ({JSON.parse(auth).name})
+            </Link>
+          </li>
+        </ul>
+      ) : (
+        <ul className="nav-ul nav-right">
+          <li>
+            <Link to="/signup">SignUp</Link>
+          </li>
+          <li>
+            <Link to="/login">LogIn</Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
