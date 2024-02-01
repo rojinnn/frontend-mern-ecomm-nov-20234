@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     const auth = localStorage.getItem("user");
@@ -29,6 +31,13 @@ const Login = () => {
       alert("Please enter correct details");
     }
   };
+
+  const handleClick = () => {
+    console.log("Before Toggle:", show);
+    setShow(!show);
+    console.log("After Toggle:", show);
+  };
+
   return (
     <div className="login">
       <h1>Login</h1>
@@ -39,13 +48,20 @@ const Login = () => {
         onChange={(e) => setEmail(e.target.value)}
         value={email}
       />
-      <input
-        type="password"
-        placeholder="Enter Password"
-        className="inputBox"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
+      <div className="password-container">
+        <input
+          type={show ? "text" : "password"}
+          placeholder="Enter Password"
+          className="inputBox"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+
+        <button className="button" onClick={handleClick}>
+          {" "}
+          {show ? "Hide" : "Show"}
+        </button>
+      </div>
       <button type="button" className="appButton" onClick={handleLogin}>
         Login
       </button>

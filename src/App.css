@@ -44,7 +44,16 @@
   margin: 20px;
   padding: 7px;
   width: 300px;
+
   border: 1px solid skyblue;
+}
+.button {
+  width: auto;
+  height: 32px;
+  padding: 10px;
+  background-color: #61dafb;
+  border: 1px solid;
+  cursor: pointer;
 }
 
 .appButton {
